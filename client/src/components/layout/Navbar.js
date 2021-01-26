@@ -6,15 +6,19 @@ import Nav from 'react-bootstrap/Nav';
 const NavbarComponent = () => {
   return (
     <Fragment>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar
+        bg='primary'
+        variant='light'
+        expand='lg'
+        fixed='top'
+        className='py-3'>
         <Container>
-          <Navbar.Brand>Hospitality Plus</Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
+          <Navbar.Brand>Ben's Café</Navbar.Brand>
+          <Navbar.Toggle aria-controls='main-navbar-nav' />
+          <Navbar.Collapse id='main-navbar-nav'>
             <Nav className='ml-auto'>
               <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/about'>About Us</Nav.Link>
-              <Nav.Link href='/services'>Services</Nav.Link>
               <Nav.Link href='/careers'>Careers</Nav.Link>
               <Nav.Link href='/contact'>Contact Us</Nav.Link>
             </Nav>
