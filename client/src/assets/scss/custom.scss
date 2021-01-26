@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
 
 $theme-colors: (
-  'accent': #8f5039,
+  'accent': #a75a3e,
 );
 
 $primary: #fff3ec;
-$secondary: #ffefe7;
+$secondary: #c8894d;
 // $dark: rgb(24, 22, 20);
 // $dark: #504948;
 // $dark-overlay: rgba(98, 111, 114, 0.8);
 $primary-overlay: #927b6ea1;
+$primary-light-overlay: #d1b5a54d;
 
 body {
   font-family: 'Quicksand', sans-serif !important;
@@ -60,8 +61,33 @@ html,
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 100vh;
+  }
+}
+
+#home-secondary {
+  background-image: url('../img/home-secondary-img.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: 50% 70%;
+  min-height: 300px;
+
+  .primary-light-overlay {
+    background: $primary-light-overlay;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
   }
+}
+
+.venue-img {
+  min-height: 230px;
+  height: auto;
+  overflow: hidden;
+  position: relative;
 }
 
 @import '~bootstrap/scss/bootstrap.scss';

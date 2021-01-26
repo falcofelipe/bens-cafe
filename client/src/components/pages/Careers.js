@@ -25,13 +25,13 @@ const Careers = () => {
           <Container>
             <ul className='list-group'>
               <li className='list-group-item bg-primary'>
-                <strong>Waiter @ St. Kilda Road</strong>
+                <strong>Waiter @ St. Kilda Rd.</strong>
                 <i> Full-time icon</i>
                 <p>
                   Our company is currently looking for a full-time qualified
                   waiter to help us in our St. Kilda Rd. venue. The ideal
                   candidate would have perfect english communicational skills,
-                  at least 6 months of experience on being a waiter in cefés or
+                  at least 6 months of experience on being a waiter in cafés or
                   restaurants, and excellent presentation. Coffee-making
                   abilities are a plus!
                 </p>
@@ -40,7 +40,7 @@ const Careers = () => {
                 </div>
               </li>
               <li className='list-group-item bg-primary'>
-                <strong>Kitchen Staff @ St. Kilda Road</strong>
+                <strong>Kitchen Staff @ St. Kilda Rd.</strong>
                 <i> Part-time icon</i>
                 <p>
                   Our company is currently looking for a part-time kitchen staff
@@ -54,7 +54,7 @@ const Careers = () => {
                 </div>
               </li>
               <li className='list-group-item bg-primary'>
-                <strong>FOH manager @ Toorak Road</strong>
+                <strong>FOH manager @ Toorak Rd.</strong>
                 <i> Part-time icon</i>
                 <p>
                   Our company is currently looking for a Front-of-house manager

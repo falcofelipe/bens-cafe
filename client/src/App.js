@@ -6,8 +6,6 @@ import About from './components/pages/About';
 import Careers from './components/pages/Careers';
 import Contact from './components/pages/Contact';
 
-import Container from 'react-bootstrap/Container';
-
 import './assets/scss/custom.scss';
 
 function App() {
