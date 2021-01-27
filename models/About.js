@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
 const AboutSchema = mongoose.Schema({
-  catch: {
+  catchphrase: {
     type: String,
     required: true,
   },
   main: {
     type: String,
     required: true,
-    unique: true,
   },
   date: {
     type: Date,
