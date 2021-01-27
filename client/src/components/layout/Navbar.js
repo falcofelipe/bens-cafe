@@ -19,8 +19,9 @@ const NavbarComponent = () => {
             <Nav className='ml-auto'>
               <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/#about'>About Us</Nav.Link>
+              <Nav.Link href='/#venues'>Our Venues</Nav.Link>
               <Nav.Link href='/careers'>Careers</Nav.Link>
-              <Nav.Link href='/contact'>Contact Us</Nav.Link>
+              <Nav.Link href='/#contact'>Contact Us</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,16 +1,21 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import CareerItem from '../careers/CareerItem';
+import { useCareers } from '../../context/careers/CareersState';
+
 import Container from 'react-bootstrap/Container';
 
 const Careers = () => {
+  const state = useCareers()[0];
+  const { positions } = state;
+
   return (
-    <div id='careers-bg'>
+    <div id='careers-content'>
       <div className='primary-overlay'>
         <section id='careers-showcase' className='py-4'>
           <div className='text-primary'>
             <Container>
               <div className='text-center'>
-                <h1 className='display-2' style={{ 'margin-top': '10rem' }}>
+                <h1 className='display-2' style={{ marginTop: '10rem' }}>
                   Join our team today!
                 </h1>
                 <p className='lead'>
@@ -23,7 +28,19 @@ const Careers = () => {
         </section>
         <div className='py-4'>
           <Container>
-            <ul className='list-group'>
+            <ul className='list-group mb-3'>
+              {positions.map(position => (
+                <CareerItem position={position} key={position.id} />
+              ))}
+            </ul>
+          </Container>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/*
               <li className='list-group-item bg-primary'>
                 <strong>Waiter @ St. Kilda Rd.</strong>
                 <i> Full-time icon</i>
@@ -55,7 +72,7 @@ const Careers = () => {
               </li>
               <li className='list-group-item bg-primary'>
                 <strong>FOH manager @ Toorak Rd.</strong>
-                <i> Part-time icon</i>
+                <i> Full-time icon</i>
                 <p>
                   Our company is currently looking for a Front-of-house manager
                   to help us in our Toorak Rd. venue. The ideal candidate would
@@ -68,13 +85,7 @@ const Careers = () => {
                 <div className='text-center'>
                   <Button variant='accent'>Apply for this position now</Button>
                 </div>
-              </li>
-            </ul>
-          </Container>
-        </div>
-      </div>
-    </div>
-  );
-};
+              </li>     
+*/
 
 export default Careers;

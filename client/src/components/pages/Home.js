@@ -1,13 +1,15 @@
 import React from 'react';
+
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+
 import venue1 from '../../assets/img/venue1.jpg';
 import venue2 from '../../assets/img/venue2.jpg';
 import venue3 from '../../assets/img/venue3.jpg';
 
 const Home = () => {
   return (
-    <div>
+    <div id='home-content'>
       <section id='home-showcase' className='py-5'>
         <div className='primary-overlay text-primary'>
           <Container className='h-100'>
@@ -46,7 +48,7 @@ const Home = () => {
           <h3 className='text-center text-primary pb-4'>Our Venues</h3>
           <div className='row'>
             <div className='col-md-4'>
-              <div className='card bg-primary'>
+              <div className='card bg-primary mb-4 mb-md-0'>
                 <div className='venue-img'>
                   <img
                     src={venue1}
@@ -67,7 +69,7 @@ const Home = () => {
               </div>
             </div>
             <div className='col-md-4'>
-              <div className='card bg-primary'>
+              <div className='card bg-primary mb-4 mb-md-0'>
                 <div className='venue-img'>
                   <img
                     src={venue2}
@@ -88,7 +90,7 @@ const Home = () => {
               </div>
             </div>
             <div className='col-md-4'>
-              <div className='card bg-primary'>
+              <div className='card bg-primary mb-4 mb-md-0'>
                 <div className='venue-img'>
                   <img
                     src={venue3}
