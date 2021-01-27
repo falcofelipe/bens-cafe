@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-const authenticate = (req, res, next) => {
+const authAdminAccess = (req, res, next) => {
   const token = req.header('x-auth-token');
 
   if (!token) {
@@ -11,6 +11,12 @@ const authenticate = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
+    if (decoded.user.type !== 'admin') {
+      return res
+        .status(401)
+        .json({ msg: 'This route is restricted to admins' });
+    }
+
     req.user = decoded.user;
 
     next();
@@ -19,4 +25,4 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = authenticate;
+module.exports = authAdminAccess;

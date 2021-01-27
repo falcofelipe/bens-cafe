@@ -8,6 +8,7 @@ const PositionSchema = mongoose.Schema({
   venue: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Venue',
+    required: true,
   },
   type: {
     type: String,
