@@ -13,6 +13,8 @@ app.use('/api/about', require('./routes/about'));
 app.use('/api/venues', require('./routes/venues'));
 app.use('/api/careers', require('./routes/careers'));
 
+//@todo       Create a careers/applications route to store applications.
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
