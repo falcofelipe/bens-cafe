@@ -16,13 +16,13 @@ body {
   font-family: 'Quicksand', sans-serif !important;
   font-weight: 300;
   height: 100%;
-  width: 100%;
+  max-width: 100%;
 }
 
 html,
 #root {
   height: 100%;
-  width: 100%;
+  max-width: 100%;
 }
 
 .navbar {
@@ -53,7 +53,7 @@ html,
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 0%;
-  min-height: 100vh;
+  height: 100vh;
 
   .primary-overlay {
     background: $primary-overlay;
@@ -88,6 +88,30 @@ html,
   height: auto;
   overflow: hidden;
   position: relative;
+}
+
+.venue-img-src {
+  background-image: url('../img/venue1.jpg');
+}
+
+.auth {
+  background-image: url('../img/home-main.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center top;
+  min-height: 560px;
+  height: calc(100vh - 60px);
+
+  .primary-overlay {
+    background: $primary-overlay;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 560px;
+    height: calc(100vh - 60px);
+  }
 }
 
 @import '~bootstrap/scss/bootstrap.scss';

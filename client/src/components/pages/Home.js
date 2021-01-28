@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useHome, getAbout, getVenues } from '../../context/home/HomeState';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -8,12 +10,20 @@ import venue2 from '../../assets/img/venue2.jpg';
 import venue3 from '../../assets/img/venue3.jpg';
 
 const Home = () => {
+  const [homeState, homeDispatch] = useHome();
+  const { about, venues } = homeState;
+
+  useEffect(() => {
+    getAbout(homeDispatch);
+    getVenues(homeDispatch);
+  }, [homeDispatch, about]);
+
   return (
-    <div id='home-content'>
+    <div id='home-content' className='mw-100 mx-0'>
       <section id='home-showcase' className='py-5'>
         <div className='primary-overlay text-primary'>
           <Container className='h-100'>
-            <div className='text-center' style={{ 'padding-top': '40vh' }}>
+            <div className='text-center' style={{ paddingTop: '40vh' }}>
               <h1 className='display-2'>Ben's Café</h1>
               <p className='lead'>A minimalist approach to modern cafés</p>
             </div>
@@ -21,24 +31,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section id='about' className='bg-primary row'>
-        <br />
-        <div className='col-md-5 py-md-5 py-3 px-md-5 px-3 text-center bg-primary'>
+      <section id='about' className='bg-primary row mx-0'>
+        <div className='col-md-5 py-md-5 py-3 px-md-5 px-3 mx-0 text-center align-self-center bg-primary'>
           <Container>
-            <h5 className='lead pb-4 pt-3'>
-              We're redisigning cafés as you know it
-            </h5>
-            <p>
-              Active since 2001 in some of the busiest areas of the city, our
-              mission is to resignify what it means to be a "modern café". Our
-              coffee beans are all hand-picked to ensure flavour and freshness,
-              and our staff is comprised of some of the best baristas in town.
-              With a keen eye for perfection, we aim to deliver excellent
-              quality service in a modern, elegant and minimalistic environment.
-            </p>
+            <h5 className='lead pb-4 pt-3'>{about.catchphrase}</h5>
+            <p>{about.main}</p>
           </Container>
         </div>
-        <div className='col-md-7' id='home-secondary'>
+        <div className='col-md-7 mx-0' id='home-secondary'>
           <div className='primary-light-overlay'></div>
         </div>
       </section>
@@ -47,7 +47,28 @@ const Home = () => {
         <Container>
           <h3 className='text-center text-primary pb-4'>Our Venues</h3>
           <div className='row'>
-            <div className='col-md-4'>
+            {venues.map((venue, idx) => (
+              <div className='col-md-4' key={venue._id}>
+                <div className='card bg-primary mb-4 mb-md-0'>
+                  <div className='venue-img'>
+                    <img
+                      src={idx === 0 ? venue1 : idx === 1 ? venue2 : venue3}
+                      alt=''
+                      className='card-img-top'
+                      style={{
+                        position: 'absolute',
+                        bottom: '0px',
+                      }}
+                    />
+                  </div>
+                  <div className='card-body text-center'>
+                    <p className='lead'>{venue.location}</p>
+                    <p>{venue.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {/* <div className='col-md-4'>
               <div className='card bg-primary mb-4 mb-md-0'>
                 <div className='venue-img'>
                   <img
@@ -109,7 +130,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </Container>
       </section>

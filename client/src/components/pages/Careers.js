@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CareerItem from '../careers/CareerItem';
-import { useCareers } from '../../context/careers/CareersState';
+import { useCareers, getPositions } from '../../context/careers/CareersState';
 
 import Container from 'react-bootstrap/Container';
 
 const Careers = () => {
-  const state = useCareers()[0];
-  const { positions } = state;
+  const [careersState, careersDispatch] = useCareers();
+
+  const { positions } = careersState;
+
+  useEffect(() => {
+    getPositions(careersDispatch);
+  }, [careersDispatch, positions]);
 
   return (
     <div id='careers-content'>
@@ -30,7 +35,7 @@ const Careers = () => {
           <Container>
             <ul className='list-group mb-3'>
               {positions.map(position => (
-                <CareerItem position={position} key={position.id} />
+                <CareerItem position={position} key={position._id} />
               ))}
             </ul>
           </Container>
@@ -39,53 +44,5 @@ const Careers = () => {
     </div>
   );
 };
-
-/*
-              <li className='list-group-item bg-primary'>
-                <strong>Waiter @ St. Kilda Rd.</strong>
-                <i> Full-time icon</i>
-                <p>
-                  Our company is currently looking for a full-time qualified
-                  waiter to help us in our St. Kilda Rd. venue. The ideal
-                  candidate would have perfect english communicational skills,
-                  at least 6 months of experience on being a waiter in cafés or
-                  restaurants, and excellent presentation. Coffee-making
-                  abilities are a plus!
-                </p>
-                <div className='text-center'>
-                  <Button variant='accent'>Apply for this position now</Button>
-                </div>
-              </li>
-              <li className='list-group-item bg-primary'>
-                <strong>Kitchen Staff @ St. Kilda Rd.</strong>
-                <i> Part-time icon</i>
-                <p>
-                  Our company is currently looking for a part-time kitchen staff
-                  to help us in our St. Kilda Rd. venue. The ideal candidate
-                  would have a passion for food and cooking, shown abilities to
-                  work very well in teams and follow orders, and impecable
-                  cleanliness.
-                </p>
-                <div className='text-center'>
-                  <Button variant='accent'>Apply for this position now</Button>
-                </div>
-              </li>
-              <li className='list-group-item bg-primary'>
-                <strong>FOH manager @ Toorak Rd.</strong>
-                <i> Full-time icon</i>
-                <p>
-                  Our company is currently looking for a Front-of-house manager
-                  to help us in our Toorak Rd. venue. The ideal candidate would
-                  have more than five years of experience in the area and at
-                  least one year of experience as a management role. He/she
-                  would also have excellent communicational and leadership
-                  skills. Excellent coffee-making skills are essential,
-                  including latte art!
-                </p>
-                <div className='text-center'>
-                  <Button variant='accent'>Apply for this position now</Button>
-                </div>
-              </li>     
-*/
 
 export default Careers;

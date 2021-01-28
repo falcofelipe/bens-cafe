@@ -6,25 +6,40 @@ import About from './components/pages/About';
 import Careers from './components/pages/Careers';
 import Contact from './components/pages/Contact';
 import Footer from './components/layout/Footer';
+
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+
 import CareersState from './context/careers/CareersState';
+import HomeState from './context/home/HomeState';
+import AuthState from './context/auth/AuthState';
+import AlertState from './context/alert/AlertState';
 
 import './assets/scss/custom.scss';
 
 function App() {
   return (
     <Fragment>
-      <CareersState>
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/careers' component={Careers} />
-            <Route exact path='/contact' component={Contact} />
-          </Switch>
-          <Footer />
-        </Router>
-      </CareersState>
+      <AuthState>
+        <HomeState>
+          <CareersState>
+            <AlertState>
+              <Router>
+                <Navbar />
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/careers' component={Careers} />
+                  <Route exact path='/contact' component={Contact} />
+                  <Route exact path='/login' component={Login} />
+                  <Route exact path='/register' component={Register} />
+                </Switch>
+                <Footer />
+              </Router>
+            </AlertState>
+          </CareersState>
+        </HomeState>
+      </AuthState>
     </Fragment>
   );
 }
