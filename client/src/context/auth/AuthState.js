@@ -112,7 +112,7 @@ const AuthState = props => {
   setAuthToken(state.token);
 
   // Load user when page loads
-  if (state.loading) {
+  if (state.loading && state.token) {
     loadUser(dispatch);
   }
 
