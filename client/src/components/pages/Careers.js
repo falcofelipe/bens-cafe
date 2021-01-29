@@ -3,15 +3,16 @@ import CareerItem from '../careers/CareerItem';
 import { useCareers, getPositions } from '../../context/careers/CareersState';
 
 import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Careers = () => {
   const [careersState, careersDispatch] = useCareers();
 
-  const { positions } = careersState;
+  const { positions, loading } = careersState;
 
   useEffect(() => {
     getPositions(careersDispatch);
-  }, [careersDispatch, positions]);
+  }, [careersDispatch]);
 
   return (
     <div id='careers-content'>
@@ -33,11 +34,17 @@ const Careers = () => {
         </section>
         <div className='py-4'>
           <Container>
-            <ul className='list-group mb-3'>
-              {positions.map(position => (
-                <CareerItem position={position} key={position._id} />
-              ))}
-            </ul>
+            {loading ? (
+              <div className='text-center'>
+                <Spinner animation='border' />
+              </div>
+            ) : (
+              <ul className='list-group mb-3'>
+                {positions.map(position => (
+                  <CareerItem position={position} key={position._id} />
+                ))}
+              </ul>
+            )}
           </Container>
         </div>
       </div>

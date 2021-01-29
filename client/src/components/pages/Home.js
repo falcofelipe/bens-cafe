@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 
 const Home = () => {
   const [homeState, homeDispatch] = useHome();
-  const { about, venues } = homeState;
+  const { about, venues, loading } = homeState;
 
   useEffect(() => {
     try {
@@ -27,9 +27,9 @@ const Home = () => {
     <div id='home-content' className='mw-100 mx-0'>
       <Showcase />
 
-      <About about={about} />
+      <About about={about} loading={loading} />
 
-      <Venues venues={venues} />
+      <Venues venues={venues} loading={loading} />
 
       <section id='contact' className='bg-primary'>
         <div className='row py-5'>

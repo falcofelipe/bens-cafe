@@ -31,6 +31,14 @@ html,
   background: #fff;
 }
 
+#nav-acc-dropdown {
+  background-color: $primary;
+}
+
+.dropdown-menu.show {
+  background-color: $primary !important;
+}
+
 #careers-content {
   background-image: url('../img/careers-main.jpg');
   background-size: cover;
@@ -83,15 +91,19 @@ html,
   }
 }
 
-.venue-img {
-  min-height: 230px;
-  height: auto;
-  overflow: hidden;
-  position: relative;
-}
+// .venue-img {
+//   min-height: 230px;
+//   height: auto;
+//   max-height: 240px;
+//   overflow: hidden;
+//   position: relative;
+//   object-fit: cover;
+// }
 
-.venue-img-src {
-  background-image: url('../img/venue1.jpg');
+.card-img-top {
+  width: 100%;
+  height: 20vw;
+  object-fit: cover;
 }
 
 .auth {
@@ -111,6 +123,22 @@ html,
     width: 100%;
     min-height: 560px;
     height: calc(100vh - 60px);
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 }
 
