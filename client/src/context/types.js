@@ -20,5 +20,7 @@ export const POSITIONS_ERROR = 'POSITIONS_ERROR';
 // Home Types
 export const GET_ABOUT = 'GET_ABOUT';
 export const ABOUT_ERROR = 'ABOUT_ERROR';
+export const GET_CONTENT = 'GET_CONTENT';
 export const GET_VENUES = 'GET_VENUES';
 export const VENUES_ERROR = 'VENUES_ERROR';
+export const CONTENT_ERROR = 'CONTENT_ERROR';

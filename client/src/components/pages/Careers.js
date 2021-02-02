@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CareerItem from '../careers/CareerItem';
-import { useCareers, getPositions } from '../../context/careers/CareersState';
+import { useCareers } from '../../context/careers/CareersState';
 
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 
 const Careers = () => {
-  const [careersState, careersDispatch] = useCareers();
+  const careersState = useCareers()[0];
 
   const { positions, loading } = careersState;
-
-  useEffect(() => {
-    getPositions(careersDispatch);
-  }, [careersDispatch]);
 
   return (
     <div id='careers-content'>

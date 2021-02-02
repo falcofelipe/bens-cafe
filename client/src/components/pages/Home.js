@@ -1,27 +1,15 @@
-import React, { createRef, useEffect } from 'react';
+import React from 'react';
 
-import { useHome, getAbout, getVenues } from '../../context/home/HomeState';
+import { useHome } from '../../context/home/HomeState';
 import Showcase from '../home/Showcase';
 import About from '../home/About';
 import Venues from '../home/Venues';
 
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 const Home = () => {
-  const [homeState, homeDispatch] = useHome();
+  const homeState = useHome()[0];
   const { about, venues, loading } = homeState;
-
-  useEffect(() => {
-    try {
-      getAbout(homeDispatch);
-      getVenues(homeDispatch);
-    } catch (error) {
-      console.error(error);
-      console.log(error.data);
-      throw new Error(error);
-    }
-  }, [homeDispatch]);
 
   return (
     <div id='home-content' className='mw-100 mx-0'>

@@ -4,11 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { useAuth, logoutUser, clearErrors } from '../../context/auth/AuthState';
+import { useAuth, logoutUser } from '../../context/auth/AuthState';
 
 const NavbarComponent = () => {
   const [authState, authDispatch] = useAuth();
-  const { isAuthenticated, error, user } = authState;
+  const { isAuthenticated, user } = authState;
 
   const loginAndRegister = (
     <NavDropdown

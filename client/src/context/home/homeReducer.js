@@ -1,21 +1,15 @@
-import { GET_ABOUT, ABOUT_ERROR, GET_VENUES, VENUES_ERROR } from '../types';
+import { GET_CONTENT, CONTENT_ERROR } from '../types';
 
 const homeReducer = (state, action) => {
   switch (action.type) {
-    case GET_ABOUT:
+    case GET_CONTENT:
       return {
         ...state,
-        about: action.payload,
+        about: action.payload.about,
+        venues: action.payload.venues,
         loading: false,
       };
-    case GET_VENUES:
-      return {
-        ...state,
-        venues: action.payload,
-        loading: false,
-      };
-    case ABOUT_ERROR:
-    case VENUES_ERROR:
+    case CONTENT_ERROR:
       return {
         loading: false,
         error: action.payload,
