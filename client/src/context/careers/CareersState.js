@@ -25,7 +25,7 @@ const managePositionsData = positionsRaw => {
   return positions;
 };
 
-/*--------------------- STATE -----------------------*/
+/*--------------------- STATES -----------------------*/
 
 const CareersState = props => {
   const initialState = {
@@ -53,6 +53,8 @@ const CareersState = props => {
         if (axios.isCancel(error)) {
         } else {
           console.error(error);
+          console.error(error.response);
+          console.error(error.response.data);
 
           dispatch({
             type: POSITIONS_ERROR,
@@ -63,7 +65,7 @@ const CareersState = props => {
     };
 
     fetchPositions().then(positions => {
-      if (mounted) {
+      if (mounted && positions) {
         dispatch({
           type: GET_POSITIONS,
           payload: positions,

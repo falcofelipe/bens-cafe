@@ -30,7 +30,7 @@ const Careers = () => {
         </section>
         <div className='py-4'>
           <Container>
-            {loading ? (
+            {loading || !positions ? (
               <div className='text-center'>
                 <Spinner animation='border' />
               </div>

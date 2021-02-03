@@ -8,6 +8,8 @@ import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+import AdminRoot from './components/admin/AdminRoot';
+
 import CareersState from './context/careers/CareersState';
 import HomeState from './context/home/HomeState';
 import AuthState from './context/auth/AuthState';
@@ -23,14 +25,23 @@ function App() {
           <CareersState>
             <AlertState>
               <Router>
-                <Navbar />
                 <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/careers' component={Careers} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/register' component={Register} />
+                  <Route path='/admin'>
+                    <Switch>
+                      <Route path='/admin' component={AdminRoot} />
+                    </Switch>
+                  </Route>
+                  <Route path='/'>
+                    <Navbar />
+                    <Switch>
+                      <Route exact path='/' component={Home} />
+                      <Route exact path='/careers' component={Careers} />
+                      <Route exact path='/login' component={Login} />
+                      <Route exact path='/register' component={Register} />
+                    </Switch>
+                    <Footer />
+                  </Route>
                 </Switch>
-                <Footer />
               </Router>
             </AlertState>
           </CareersState>

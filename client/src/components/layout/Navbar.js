@@ -11,18 +11,15 @@ const NavbarComponent = () => {
   const { isAuthenticated, user } = authState;
 
   const loginAndRegister = (
-    <NavDropdown
-      title='Account'
-      id='nav-acc-dropdown'
-      className='pl-3 text-center'>
+    <NavDropdown title='Account' id='nav-acc-dropdown'>
       <Nav.Item>
-        <Nav.Link href='/login' className='text-center'>
+        <Nav.Link href='/login' className='nav-acc-link'>
           <i className='fas fa-sign-in-alt' />{' '}
           <span className='hide-sm'>Login</span>
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href='/register' className='text-center'>
+        <Nav.Link href='/register' className='nav-acc-link'>
           <i className='fas fa-user' />{' '}
           <span className='hide-sm'>Register</span>
         </Nav.Link>
@@ -52,7 +49,8 @@ const NavbarComponent = () => {
         variant='light'
         expand='lg'
         fixed='top'
-        className='py-3 mx-0 w-100 mw-100'>
+        className='py-3 mx-0 w-100 mw-100'
+        id='main-navbar'>
         <Container>
           <Navbar.Brand>Ben's Café</Navbar.Brand>
           <Navbar.Toggle aria-controls='main-navbar-nav' />

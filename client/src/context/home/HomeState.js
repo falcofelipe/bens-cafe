@@ -52,7 +52,7 @@ const HomeState = props => {
     };
 
     fetchContent().then(data => {
-      if (mounted) {
+      if (mounted && data) {
         dispatch({
           type: GET_CONTENT,
           payload: { about: data.about, venues: data.venues },

@@ -12,7 +12,7 @@ const Venues = ({ venues, loading }) => {
       <Container>
         <h3 className='text-center text-primary pb-4'>Our Venues</h3>
         <div className='row'>
-          {loading ? (
+          {loading || !venues ? (
             <div className='text-center mx-auto'>
               <Spinner animation='border' />
             </div>

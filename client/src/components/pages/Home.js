@@ -6,6 +6,7 @@ import About from '../home/About';
 import Venues from '../home/Venues';
 
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 const Home = () => {
   const homeState = useHome()[0];
@@ -20,18 +21,20 @@ const Home = () => {
       <Venues venues={venues} loading={loading} />
 
       <section id='contact' className='bg-primary'>
-        <div className='row py-5'>
-          <div className='col-lg-4 col-md-3 d-sm-hidden'></div>
-          <div className='col-lg-2 col-md-3 text-center'>
-            <h2>Any doubts?</h2>
+        <Container fluid>
+          <div className='row py-5'>
+            <div className='col-lg-4 col-md-3 d-sm-hidden'></div>
+            <div className='col-lg-2 col-md-3 text-center'>
+              <h2>Any doubts?</h2>
+            </div>
+            <div className='col-lg-2 col-md-3 text-center'>
+              <Button variant='accent' className='btn-lg'>
+                Contact Us!
+              </Button>
+            </div>
+            <div className='col-lg-4 col-md-3 d-sm-hidden'></div>
           </div>
-          <div className='col-lg-2 col-md-3 text-center'>
-            <Button variant='accent' className='btn-lg'>
-              Contact Us!
-            </Button>
-          </div>
-          <div className='col-lg-4 col-md-3 d-sm-hidden'></div>
-        </div>
+        </Container>
       </section>
     </div>
   );
