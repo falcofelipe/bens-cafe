@@ -8,6 +8,18 @@ import NavLink from 'react-bootstrap/NavLink';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const AdminNavbar = () => {
+  const toggleSidebar = () => {
+    const sidebar = document.getElementById('sidebar');
+    const main = document.getElementById('admin-main');
+    if (!sidebar.classList.contains('toggle')) {
+      sidebar.classList.add('toggle');
+      main.classList.add('toggle');
+    } else {
+      sidebar.classList.remove('toggle');
+      main.classList.remove('toggle');
+    }
+  };
+
   return (
     <Fragment>
       <Navbar
@@ -17,10 +29,7 @@ const AdminNavbar = () => {
         className='py-3 w-100 mw-100'
         id='adm-navbar'>
         <Container>
-          <Nav.Link
-            href='#'
-            id='sidebarCollapse'
-            onClick={() => console.log('Collapsed')}>
+          <Nav.Link href='#' id='sidebarCollapse' onClick={toggleSidebar}>
             <i className='fas fa-bars' />{' '}
             <span className='d-none d-lg-inline'>Toggle Sidebar</span>
           </Nav.Link>

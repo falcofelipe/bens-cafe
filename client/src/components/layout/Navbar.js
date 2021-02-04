@@ -11,7 +11,7 @@ const NavbarComponent = () => {
   const { isAuthenticated, user } = authState;
 
   const loginAndRegister = (
-    <NavDropdown title='Account' id='nav-acc-dropdown'>
+    <NavDropdown title='Account' className='nav-acc-dropdown'>
       <Nav.Item>
         <Nav.Link href='/login' className='nav-acc-link'>
           <i className='fas fa-sign-in-alt' />{' '}
@@ -30,15 +30,16 @@ const NavbarComponent = () => {
   const logout = (
     <NavDropdown
       title={`Hello ${user ? user.name : null}`}
-      id='nav-acc-dropdown'
-      className='pl-3'>
-      <NavDropdown.Item
-        href='#!'
-        onClick={() => logoutUser(authDispatch)}
-        className='text-center'>
-        <i className='fas fa-sign-out-alt' />{' '}
-        <span className='hide-sm'>Logout</span>
-      </NavDropdown.Item>
+      className='nav-acc-dropdown'>
+      <Nav.Item>
+        <Nav.Link
+          href='#!'
+          onClick={() => logoutUser(authDispatch)}
+          className='nav-acc-link'>
+          <i className='fas fa-sign-out-alt' />{' '}
+          <span className='hide-sm'>Logout</span>
+        </Nav.Link>
+      </Nav.Item>
     </NavDropdown>
   );
 
