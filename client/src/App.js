@@ -8,7 +8,7 @@ import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
-import AdminRoot from './components/admin/AdminRoot';
+import AdminPanel from './components/admin/AdminPanel';
 
 import CareersState from './context/careers/CareersState';
 import HomeState from './context/home/HomeState';
@@ -28,7 +28,7 @@ function App() {
                 <Switch>
                   <Route path='/admin'>
                     <Switch>
-                      <Route path='/admin' component={AdminRoot} />
+                      <Route path='/admin' component={AdminPanel} />
                     </Switch>
                   </Route>
                   <Route path='/'>

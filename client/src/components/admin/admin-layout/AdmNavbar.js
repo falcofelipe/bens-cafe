@@ -7,7 +7,7 @@ import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const AdminNavbar = () => {
+const AdmNavbar = () => {
   const toggleSidebar = () => {
     const sidebar = document.getElementById('sidebar');
     const main = document.getElementById('admin-main');
@@ -19,6 +19,20 @@ const AdminNavbar = () => {
       main.classList.remove('toggle');
     }
   };
+
+  // Updates the title and icon according to the path visited
+  let title, iconClass;
+  let path = window.location.pathname;
+  if (path.includes('home')) {
+    title = 'Home Content';
+    iconClass = 'fas fa-home';
+  } else if (path.includes('positions')) {
+    title = 'Positions';
+    iconClass = 'fas fa-user-tie';
+  } else {
+    title = 'Dashboard';
+    iconClass = 'fas fa-cog';
+  }
 
   return (
     <Fragment>
@@ -34,10 +48,13 @@ const AdminNavbar = () => {
             <span className='d-none d-lg-inline'>Toggle Sidebar</span>
           </Nav.Link>
           <Navbar.Brand className='text-center adm-navbar-brand py-0 mx-auto'>
-            <i className='fas fa-cog text-secondary' /> Dashboard
+            <i className={iconClass} /> {title}
           </Navbar.Brand>
           <Nav>
-            <Dropdown as={NavItem} id='adm-acc-dropdown'>
+            <Dropdown
+              as={NavItem}
+              id='adm-acc-dropdown'
+              className='text-primary'>
               <Dropdown.Toggle as={NavLink}>
                 <i className='fas fa-user' />{' '}
                 <span className='d-none d-lg-inline'>Hello Chris</span>
@@ -59,4 +76,4 @@ const AdminNavbar = () => {
   );
 };
 
-export default AdminNavbar;
+export default AdmNavbar;

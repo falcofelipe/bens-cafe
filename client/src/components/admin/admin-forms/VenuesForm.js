@@ -1,7 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import VenueForm from './VenueForm';
 
-const EditVenuesForm = () => {
+const VenuesForm = () => {
   return (
     <Form>
       <Form.Group>
@@ -14,19 +15,9 @@ const EditVenuesForm = () => {
           <option value=''>High St.</option>
         </Form.Control>
       </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor='title'>Location</Form.Label>
-        <Form.Control type='text' name='title' />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label htmlFor='venue-description'>Venue Description</Form.Label>
-        <Form.Control
-          as='textarea'
-          name='venue-description'
-          rows={4}></Form.Control>
-      </Form.Group>
+      <VenueForm />
     </Form>
   );
 };
 
-export default EditVenuesForm;
+export default VenuesForm;

@@ -32,6 +32,9 @@ const NavbarComponent = () => {
       title={`Hello ${user ? user.name : null}`}
       className='nav-acc-dropdown'>
       <Nav.Item>
+        <Nav.Link href='/admin' className='nav-acc-link'>
+          <i className='fas fa-cog' /> <span className='hide-sm'>Admin</span>
+        </Nav.Link>
         <Nav.Link
           href='#!'
           onClick={() => logoutUser(authDispatch)}

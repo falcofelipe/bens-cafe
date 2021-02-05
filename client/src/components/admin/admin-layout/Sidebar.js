@@ -17,7 +17,7 @@ const AdminSidebar = () => {
         <Nav.Link href='/admin/home' className='pl-5'>
           <h6>Home Content</h6>
         </Nav.Link>
-        <Nav.Link href='/admin/careers' className='pl-5'>
+        <Nav.Link href='/admin/positions' className='pl-5'>
           <h6>Positions</h6>
         </Nav.Link>
         <Nav.Link
