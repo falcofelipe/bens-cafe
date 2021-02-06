@@ -44,6 +44,7 @@ const AdminModals = () => {
   // Generates the buttons according to the page
   let buttons;
   let path = window.location.pathname;
+  let classes = 'bg-accent pt-3 pb-1';
   if (path.includes('home')) {
     buttons = (
       <div className='row'>
@@ -57,6 +58,13 @@ const AdminModals = () => {
         <div className='col-sm-10 mb-2 mx-auto'>{positionsButton}</div>
       </div>
     );
+  } else if (
+    path.includes('about/') ||
+    path.includes('venue/') ||
+    path.includes('position/')
+  ) {
+    buttons = <div className='row d-none'></div>;
+    classes = 'd-none';
   } else {
     buttons = (
       <div className='row'>
@@ -68,7 +76,7 @@ const AdminModals = () => {
   }
 
   return (
-    <section id='modals' className='bg-accent pt-3 pb-1'>
+    <section id='modals' className={classes}>
       <Container>{buttons}</Container>
 
       {/* Add Position Modal */}
@@ -86,7 +94,9 @@ const AdminModals = () => {
         </Modal.Body>
         <Modal.Footer className='modal-footer'>
           <button
-            className='btn btn-primary'
+            type='submit'
+            form='position-form-add'
+            className='btn btn-accent'
             onClick={() => hideModal('positions')}>
             Save Changes
           </button>
@@ -108,7 +118,9 @@ const AdminModals = () => {
         </Modal.Body>
         <Modal.Footer className='modal-footer'>
           <button
-            className='btn btn-primary'
+            type='submit'
+            form='about-form'
+            className='btn btn-accent'
             onClick={() => hideModal('about')}>
             Save Changes
           </button>
@@ -130,7 +142,7 @@ const AdminModals = () => {
         </Modal.Body>
         <Modal.Footer className='modal-footer'>
           <button
-            className='btn btn-primary'
+            className='btn btn-accent'
             onClick={() => hideModal('venues')}>
             Save Changes
           </button>

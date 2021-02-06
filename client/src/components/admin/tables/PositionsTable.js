@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { useCareers } from '../../../context/careers/CareersState';
 
@@ -47,9 +48,17 @@ const PositionsTable = ({ recent, shortened }) => {
                 : position.description}
             </td>
             <td>
-              <a href='#!' className='btn btn-accent btn-sm'>
-                <i className='fas fa-angle-double-right'></i> Details
-              </a>
+              <Link
+                to={{
+                  pathname: `/admin/positions/${idx + 1}`,
+                  state: {
+                    position,
+                    action: 'edit',
+                  },
+                }}
+                className='btn btn-accent btn-sm'>
+                <i className='fas fa-angle-double-right'></i> More
+              </Link>
             </td>
           </tr>
         ))}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { useHome } from '../../../context/home/HomeState';
 
@@ -37,9 +38,17 @@ const VenuesTable = ({ shortened }) => {
                 : venue.description}
             </td>
             <td>
-              <a href='#!' className='btn btn-accent btn-sm'>
-                <i className='fas fa-angle-double-right'></i> Details
-              </a>
+              <Link
+                to={{
+                  pathname: `/admin/venues/${idx + 1}`,
+                  state: {
+                    venue,
+                    action: 'edit',
+                  },
+                }}
+                className='btn btn-accent btn-sm'>
+                <i className='fas fa-angle-double-right'></i> More
+              </Link>
             </td>
           </tr>
         ))}

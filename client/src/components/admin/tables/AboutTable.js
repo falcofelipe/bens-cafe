@@ -30,8 +30,8 @@ const AboutTable = ({ shortened }) => {
           <td>{about.catchphrase}</td>
           <td>{shortened ? shortenDescription(about.main) : about.main}</td>
           <td>
-            <a href='#!' className='btn btn-accent btn-sm'>
-              <i className='fas fa-angle-double-right'></i> Details
+            <a href='/admin/about/1' className='btn btn-accent btn-sm'>
+              <i className='fas fa-angle-double-right'></i> More
             </a>
           </td>
         </tr>
