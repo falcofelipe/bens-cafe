@@ -15,12 +15,17 @@ export const CLEAR_ALERTS = 'CLEAR_ALERTS';
 
 // Careers Types
 export const GET_POSITIONS = 'GET_POSITIONS';
-export const POSITIONS_ERROR = 'POSITIONS_ERROR';
+export const ADD_POSITION = 'ADD_POSITION';
+export const UPDATE_POSITION = 'UPDATE_POSITION';
+export const DELETE_POSITION = 'DELETE_POSITION';
+export const POSITION_ERROR = 'POSITIONS_ERROR';
 
 // Home Types
 export const GET_ABOUT = 'GET_ABOUT';
+export const UPDATE_ABOUT = 'UPDATE_ABOUT';
 export const ABOUT_ERROR = 'ABOUT_ERROR';
-export const GET_CONTENT = 'GET_CONTENT';
 export const GET_VENUES = 'GET_VENUES';
-export const VENUES_ERROR = 'VENUES_ERROR';
+export const UPDATE_VENUE = 'UPDATE_VENUE';
+export const VENUE_ERROR = 'VENUES_ERROR';
+export const GET_CONTENT = 'GET_CONTENT';
 export const CONTENT_ERROR = 'CONTENT_ERROR';

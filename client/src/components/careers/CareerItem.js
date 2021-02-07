@@ -8,7 +8,7 @@ const CareerItem = ({ position }) => {
   return (
     <li className='list-group-item bg-primary p-4 py-md-3'>
       <strong>
-        {title} @ {venue}
+        {title} @ {venue.location}
       </strong>
       {/* Capitalizes the job type string */}
       <i> {type.slice(0, 1).toUpperCase() + type.slice(1)} </i>

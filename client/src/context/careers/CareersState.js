@@ -1,9 +1,15 @@
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer, useContext, useEffect, createRef } from 'react';
 import axios from 'axios';
 import CareersContext from './careersContext';
 import careersReducer from './careersReducer';
 
-import { GET_POSITIONS, POSITIONS_ERROR } from '../types';
+import {
+  GET_POSITIONS,
+  ADD_POSITION,
+  UPDATE_POSITION,
+  DELETE_POSITION,
+  POSITION_ERROR,
+} from '../types';
 
 export const useCareers = () => {
   const { state, dispatch } = useContext(CareersContext);
@@ -11,6 +17,12 @@ export const useCareers = () => {
 };
 
 /*--------------------- ACTIONS -----------------------*/
+
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
 
 const managePositionsData = positionsRaw => {
   // Takes care of "venue" being a full "Venue" object, and only passes in the venue name (location)
@@ -23,6 +35,77 @@ const managePositionsData = positionsRaw => {
   }));
 
   return positions;
+};
+
+export const getPositions = async dispatch => {
+  try {
+    const positions = await axios.get('/api/careers');
+
+    dispatch({
+      type: GET_POSITIONS,
+      payload: positions.data,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: POSITION_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
+};
+
+export const addNewPosition = async (dispatch, positionData) => {
+  try {
+    const newPos = await axios.post('/api/careers', positionData, config);
+
+    dispatch({
+      type: ADD_POSITION,
+      payload: newPos.data,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: POSITION_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
+};
+
+export const updatePosition = async (dispatch, updatedPosition) => {
+  try {
+    const position = await axios.put(
+      `/api/careers/${updatedPosition._id}`,
+      updatedPosition,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_POSITION,
+      payload: position.data,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: POSITION_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
+};
+
+export const deletePosition = async (dispatch, positionId) => {
+  try {
+    await axios.delete(`/api/careers/${positionId}`);
+
+    dispatch({
+      type: DELETE_POSITION,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: POSITION_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
 };
 
 /*--------------------- STATES -----------------------*/
@@ -46,9 +129,9 @@ const CareersState = props => {
           cancelToken: source.token, //Needed for the cancellation
         });
 
-        const positions = managePositionsData(positionsRaw.data);
+        // const positions = managePositionsData(positionsRaw.data);
 
-        return positions;
+        return positionsRaw.data;
       } catch (error) {
         if (axios.isCancel(error)) {
         } else {
@@ -57,7 +140,7 @@ const CareersState = props => {
           console.error(error.response.data);
 
           dispatch({
-            type: POSITIONS_ERROR,
+            type: POSITION_ERROR,
             payload: error.response.data.msg,
           });
         }

@@ -1,23 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { useCareers } from '../../../context/careers/CareersState';
+import {
+  useCareers,
+  getPositions,
+} from '../../../context/careers/CareersState';
 
 const PositionsTable = ({ recent, shortened }) => {
-  const careersState = useCareers()[0];
+  const [careersState, careersDispatch] = useCareers();
   const { positions, loading } = careersState;
 
-  // Sorts the positions by most recent
-  let positionsFiltered = positions.reverse();
-  if (recent) {
-    positionsFiltered = positionsFiltered.slice(0, recent); //Gets the most recent pos.
-  }
+  useEffect(() => {
+    getPositions(careersDispatch);
+  }, [careersDispatch, positions]);
 
-  const shortenDescription = description => {
-    const descriptionArray = description.split(' ');
-    const descriptionString = descriptionArray.slice(0, 11).join(' ');
-    return descriptionString + ' ...';
-  };
+  let location = useLocation();
+  let positionsFiltered, shortenDescription;
+
+  // Sorts the positions by most recent
+  if (!loading && positions) {
+    positionsFiltered = positions.reverse();
+    if (recent) {
+      positionsFiltered = positionsFiltered.slice(0, recent); //Gets the most recent pos.
+    }
+
+    shortenDescription = description => {
+      let descriptionArray, maxLength, joinStr;
+      if (description.includes(' ')) {
+        descriptionArray = description.split(' ');
+        maxLength = 11;
+        joinStr = ' ';
+      } else {
+        descriptionArray = Array.from(description);
+        maxLength = 51;
+        joinStr = '';
+      }
+      const descriptionString = descriptionArray
+        .slice(0, maxLength)
+        .join(joinStr);
+      return descriptionArray.length > maxLength
+        ? descriptionString + ' ...'
+        : descriptionString;
+    };
+  }
 
   return loading || !positions ? (
     <div className='text-center my-2'>
@@ -37,11 +62,11 @@ const PositionsTable = ({ recent, shortened }) => {
       </thead>
       <tbody>
         {positionsFiltered.map((position, idx) => (
-          <tr key={position._id}>
+          <tr key={idx}>
             <td>{idx + 1}</td>
             <td>{position.title}</td>
             <td>{position.type}</td>
-            <td>{position.venue}</td>
+            <td>{position.venue ? position.venue.location : 'Loading...'}</td>
             <td>
               {shortened
                 ? shortenDescription(position.description)
@@ -54,6 +79,7 @@ const PositionsTable = ({ recent, shortened }) => {
                   state: {
                     position,
                     action: 'edit',
+                    // previousPath: location.pathname,
                   },
                 }}
                 className='btn btn-accent btn-sm'>

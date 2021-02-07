@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { useCareers } from '../../../context/careers/CareersState';
+import {
+  useCareers,
+  addNewPosition,
+  updatePosition,
+} from '../../../context/careers/CareersState';
+import { useHome } from '../../../context/home/HomeState';
 
 const PositionForm = props => {
-  const careersState = useCareers()[0];
-  // const { loading } = careersState;
+  const [careersState, careersDispatch] = useCareers();
+  const homeState = useHome()[0];
+  const { venues } = homeState;
 
   let initialState, formId;
   let action = 'add';
@@ -17,7 +23,7 @@ const PositionForm = props => {
     initialState = {
       title: '',
       type: 'full-time',
-      venue: 'St. Kilda Rd.',
+      venue: venues[0],
       description: '',
     };
     formId = 'position-form-add';
@@ -33,10 +39,22 @@ const PositionForm = props => {
       [e.target.name]: e.target.value,
     });
 
+  const onChangeVenue = e => {
+    setPosition({
+      ...position,
+      venue: venues.filter(venue => venue._id === e.target.value)[0],
+    });
+  };
+
   const onSubmit = e => {
     e.preventDefault();
 
-    console.log(`Submitted the form with `, position);
+    if (action === 'add') {
+      addNewPosition(careersDispatch, position);
+    } else if (action === 'edit') {
+      updatePosition(careersDispatch, position);
+      props.history.goBack();
+    }
 
     return false;
   };
@@ -65,11 +83,13 @@ const PositionForm = props => {
         <Form.Control
           as='select'
           name='venue'
-          value={venue}
-          onChange={onChange}>
-          <option value='St. Kilda Rd.'>St. Kilda Rd.</option>
-          <option value='Toorak Rd.'>Toorak Rd.</option>
-          <option value='High St.'>High St.</option>
+          value={venue._id}
+          onChange={onChangeVenue}>
+          {venues.map(venue => (
+            <option value={venue._id} key={venue._id}>
+              {venue.location}
+            </option>
+          ))}
         </Form.Control>
       </Form.Group>
       <Form.Group>
