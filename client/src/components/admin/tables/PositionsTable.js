@@ -19,7 +19,7 @@ const PositionsTable = ({ recent, shortened }) => {
 
   // Sorts the positions by most recent
   if (!loading && positions) {
-    positionsFiltered = positions.reverse();
+    positionsFiltered = positions.slice().reverse();
     if (recent) {
       positionsFiltered = positionsFiltered.slice(0, recent); //Gets the most recent pos.
     }
@@ -31,7 +31,7 @@ const PositionsTable = ({ recent, shortened }) => {
         maxLength = 11;
         joinStr = ' ';
       } else {
-        descriptionArray = Array.from(description);
+        descriptionArray = description.split('');
         maxLength = 51;
         joinStr = '';
       }
@@ -68,7 +68,7 @@ const PositionsTable = ({ recent, shortened }) => {
             <td>{position.type}</td>
             <td>{position.venue ? position.venue.location : 'Loading...'}</td>
             <td>
-              {shortened
+              {position.description && shortened
                 ? shortenDescription(position.description)
                 : position.description}
             </td>

@@ -80,11 +80,7 @@ const PositionForm = props => {
       </Form.Group>
       <Form.Group>
         <Form.Label htmlFor='venue'>Venue</Form.Label>
-        <Form.Control
-          as='select'
-          name='venue'
-          value={venue._id}
-          onChange={onChangeVenue}>
+        <Form.Control as='select' name='venue' onChange={onChangeVenue}>
           {venues.map(venue => (
             <option value={venue._id} key={venue._id}>
               {venue.location}

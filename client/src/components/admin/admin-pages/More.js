@@ -28,6 +28,7 @@ const More = props => {
   let form, formId, title;
 
   let state = props.location.state;
+  let includeDelete = false;
 
   if (path.includes('about')) {
     title = 'About';
@@ -37,6 +38,7 @@ const More = props => {
     title = 'Position';
     form = <PositionForm state={state} history={props.history} />;
     formId = `position-form-${state.position._id}`;
+    includeDelete = true;
   } else if (path.includes('venue')) {
     title = 'Venue';
     form = <VenueForm state={state} history={props.history} />;
@@ -51,13 +53,15 @@ const More = props => {
             <div className='card mb-3 bg-light'>
               <div className='card-header d-flex justify-content-between'>
                 <h4>{title}</h4>
-                <a
-                  href='#!'
-                  onClick={() =>
-                    onDelete(careersDispatch, state, props.history)
-                  }>
-                  <i className='fas fa-trash-alt text-danger my-auto mr-1 fa-lg' />
-                </a>
+                {includeDelete ? (
+                  <a
+                    href='#!'
+                    onClick={() =>
+                      onDelete(careersDispatch, state, props.history)
+                    }>
+                    <i className='fas fa-trash-alt text-danger my-auto mr-1 fa-lg' />
+                  </a>
+                ) : null}
               </div>
               <div className='card-body'>{form}</div>
               <div className='d-flex justify-content-between mx-3 mb-3'>

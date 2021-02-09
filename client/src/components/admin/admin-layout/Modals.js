@@ -119,7 +119,7 @@ const AdminModals = () => {
         <Modal.Footer className='modal-footer'>
           <button
             type='submit'
-            form='about-form'
+            form='about-form-modal'
             className='btn btn-accent'
             onClick={() => hideModal('about')}>
             Save Changes
@@ -142,6 +142,8 @@ const AdminModals = () => {
         </Modal.Body>
         <Modal.Footer className='modal-footer'>
           <button
+            type='submit'
+            form='venue-form-modal'
             className='btn btn-accent'
             onClick={() => hideModal('venues')}>
             Save Changes

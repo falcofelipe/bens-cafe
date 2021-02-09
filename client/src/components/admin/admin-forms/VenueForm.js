@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import { useHome } from '../../../context/home/HomeState';
+import { useHome, updateVenue } from '../../../context/home/HomeState';
 
 const VenueForm = props => {
-  const homeState = useHome()[0];
-  // const { loading } = homeState;
+  const [homeState, homeDispatch] = useHome();
 
-  const action = props.state.action;
   const initialState = props.state.venue;
-  const formId = `venue-form-${initialState._id}`;
+
+  let formId = `venue-form-${initialState._id}`;
 
   const [venue, setVenue] = useState(initialState);
+
+  useEffect(() => {
+    setVenue(props.state.venue);
+    formId = `venue-form-${props.state.venue._id}`;
+  }, [props.state.venue]);
 
   let { location, description } = venue;
 
@@ -23,7 +27,10 @@ const VenueForm = props => {
   const onSubmit = e => {
     e.preventDefault();
 
-    console.log(`Submitted the form with `, venue);
+    updateVenue(homeDispatch, venue);
+    if (props.history) {
+      props.history.goBack();
+    }
 
     return false;
   };

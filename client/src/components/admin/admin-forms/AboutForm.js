@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import { useHome } from '../../../context/home/HomeState';
+import {
+  useHome,
+  updateAbout,
+  updateVenue,
+} from '../../../context/home/HomeState';
 
-const EditAboutForm = () => {
-  const homeState = useHome()[0];
+const EditAboutForm = props => {
+  const [homeState, homeDispatch] = useHome();
   const { loading } = homeState;
   const aboutState = homeState.about;
 
@@ -25,10 +29,19 @@ const EditAboutForm = () => {
 
   const onChange = e => setAbout({ ...about, [e.target.name]: e.target.value });
 
+  const onSubmit = e => {
+    e.preventDefault();
+
+    updateAbout(homeDispatch, about);
+    if (props.history) {
+      props.history.goBack();
+    }
+
+    return false;
+  };
+
   return (
-    <Form
-      id='about-form'
-      onSubmit={() => console.log(`Form 'about-form' has been submitted`)}>
+    <Form id='about-form' onSubmit={onSubmit}>
       <Form.Group>
         <Form.Label htmlFor='catchphrase'>Catchphrase</Form.Label>
         <Form.Control
