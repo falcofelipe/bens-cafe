@@ -27,11 +27,7 @@ function App() {
             <AlertState>
               <Router>
                 <Switch>
-                  <PrivateRoute path='/admin'>
-                    <Switch>
-                      <PrivateRoute path='/admin' component={AdminPanel} />
-                    </Switch>
-                  </PrivateRoute>
+                  <PrivateRoute path='/admin' component={AdminPanel} />
                   <Route path='/'>
                     <Navbar />
                     <Switch>
