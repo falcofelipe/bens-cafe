@@ -13,7 +13,14 @@ app.use('/api/about', require('./routes/about'));
 app.use('/api/venues', require('./routes/venues'));
 app.use('/api/careers', require('./routes/careers'));
 
-//@todo       Create a careers/applications route to store applications.
+// Serves Static Folders in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}
 
 const PORT = process.env.PORT || 5000;
 
