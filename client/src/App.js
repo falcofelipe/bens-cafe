@@ -32,7 +32,7 @@ function App() {
                     <Navbar />
                     <Switch>
                       <Route exact path='/' component={Home} />
-                      <PrivateRoute exact path='/careers' component={Careers} />
+                      <Route exact path='/careers' component={Careers} />
                       <Route exact path='/login' component={Login} />
                       <Route exact path='/register' component={Register} />
                     </Switch>

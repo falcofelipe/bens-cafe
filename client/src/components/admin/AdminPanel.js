@@ -12,7 +12,7 @@ import Positions from './admin-pages/Positions';
 import More from './admin-pages/More';
 import Footer from '../layout/Footer';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 const AdminPanel = props => {
   return (
