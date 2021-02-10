@@ -27,17 +27,18 @@ function App() {
             <AlertState>
               <Router>
                 <Switch>
-                  <Route path='/admin' component={AdminPanel} />
+                  <PrivateRoute path='/admin' component={AdminPanel} />
                   <Route path='/'>
                     <Navbar />
                     <Switch>
                       <Route exact path='/' component={Home} />
-                      <Route exact path='/careers' component={Careers} />
+                      <PrivateRoute exact path='/careers' component={Careers} />
                       <Route exact path='/login' component={Login} />
                       <Route exact path='/register' component={Register} />
                     </Switch>
                     <Footer />
                   </Route>
+                  <PrivateRoute exact path='/gg/careers' component={Careers} />
                 </Switch>
               </Router>
             </AlertState>

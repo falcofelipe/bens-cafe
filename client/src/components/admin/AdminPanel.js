@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import PrivateRoute from '../routing/PrivateRoute';
 import { useAuth } from '../../context/auth/AuthState';
@@ -12,17 +12,9 @@ import Positions from './admin-pages/Positions';
 import More from './admin-pages/More';
 import Footer from '../layout/Footer';
 
-import { Switch } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 const AdminPanel = props => {
-  const authState = useAuth()[0];
-  const { isAuthenticated } = authState;
-
-  if (!isAuthenticated) {
-    props.history.push('/login');
-    return null;
-  }
-
   return (
     <div className='wrapper'>
       <Sidebar />
