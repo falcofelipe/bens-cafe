@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AboutForm from '../admin-forms/AboutForm';
 import PositionForm from '../admin-forms/PositionForm';
 import VenueForm from '../admin-forms/VenueForm';
@@ -13,6 +12,34 @@ import Container from 'react-bootstrap/Container';
 const More = props => {
   const careersDispatch = useCareers()[1];
 
+  let path = window.location.pathname;
+
+  if (!props.location.state) {
+    props.history.push('/admin');
+    return null;
+  }
+
+  let form, formId, title;
+
+  let state = props.location.state;
+  const { action } = state;
+  let includeDelete = false;
+
+  if (path.includes('about')) {
+    title = 'About';
+    form = <AboutForm state={state} history={props.history} />;
+    formId = `about-form-${action}`;
+  } else if (path.includes('position')) {
+    title = 'Position';
+    form = <PositionForm state={state} history={props.history} />;
+    formId = `position-form-${state.position._id}`;
+    includeDelete = true;
+  } else if (path.includes('venue')) {
+    title = 'Venue';
+    form = <VenueForm state={state} history={props.history} />;
+    formId = `venue-form-${action}`;
+  }
+
   const onDelete = (dispatch, state, history) => {
     let result = window.confirm(
       'Are you sure you want to delete this position?'
@@ -22,28 +49,6 @@ const More = props => {
       history.push('/admin/');
     }
   };
-
-  let path = window.location.pathname;
-
-  let form, formId, title;
-
-  let state = props.location.state;
-  let includeDelete = false;
-
-  if (path.includes('about')) {
-    title = 'About';
-    form = <AboutForm state={state} history={props.history} />;
-    formId = 'about-form';
-  } else if (path.includes('position')) {
-    title = 'Position';
-    form = <PositionForm state={state} history={props.history} />;
-    formId = `position-form-${state.position._id}`;
-    includeDelete = true;
-  } else if (path.includes('venue')) {
-    title = 'Venue';
-    form = <VenueForm state={state} history={props.history} />;
-    formId = `venue-form-${state.venue._id}`;
-  }
 
   return (
     <section id='edit-entry'>

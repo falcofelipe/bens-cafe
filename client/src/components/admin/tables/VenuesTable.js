@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { useHome } from '../../../context/home/HomeState';
+import { useHome, getVenues } from '../../../context/home/HomeState';
 
 const VenuesTable = ({ shortened }) => {
-  const homeState = useHome()[0];
+  const [homeState, homeDispatch] = useHome();
   const { venues, loading } = homeState;
+
+  useEffect(() => {
+    getVenues(homeDispatch);
+  }, [homeDispatch]);
 
   const shortenDescription = description => {
     const descriptionArray = description.split(' ');
@@ -33,14 +37,14 @@ const VenuesTable = ({ shortened }) => {
             <td>{idx + 1}</td>
             <td>{venue.location}</td>
             <td>
-              {shortened
+              {shortened && venue.description
                 ? shortenDescription(venue.description)
                 : venue.description}
             </td>
             <td>
               <Link
                 to={{
-                  pathname: `/admin/venues/${idx + 1}`,
+                  pathname: `/admin/venues/edit/${idx + 1}`,
                   state: {
                     venue,
                     action: 'edit',

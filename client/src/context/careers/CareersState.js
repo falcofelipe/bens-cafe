@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect, createRef } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import axios from 'axios';
 import CareersContext from './careersContext';
 import careersReducer from './careersReducer';
@@ -22,19 +22,6 @@ const config = {
   headers: {
     'Content-Type': 'application/json',
   },
-};
-
-const managePositionsData = positionsRaw => {
-  // Takes care of "venue" being a full "Venue" object, and only passes in the venue name (location)
-  const positions = positionsRaw.map(position => ({
-    _id: position._id,
-    title: position.title,
-    venue: position.venue.location,
-    type: position.type,
-    description: position.description,
-  }));
-
-  return positions;
 };
 
 export const getPositions = async dispatch => {
@@ -128,8 +115,6 @@ const CareersState = props => {
         const positionsRaw = await axios.get('/api/careers', {
           cancelToken: source.token, //Needed for the cancellation
         });
-
-        // const positions = managePositionsData(positionsRaw.data);
 
         return positionsRaw.data;
       } catch (error) {

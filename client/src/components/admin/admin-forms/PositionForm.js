@@ -8,7 +8,7 @@ import {
 import { useHome } from '../../../context/home/HomeState';
 
 const PositionForm = props => {
-  const [careersState, careersDispatch] = useCareers();
+  const careersDispatch = useCareers()[1];
   const homeState = useHome()[0];
   const { venues } = homeState;
 
@@ -31,7 +31,7 @@ const PositionForm = props => {
 
   const [position, setPosition] = useState(initialState);
 
-  let { title, type, venue, description } = position;
+  let { title, type, description } = position;
 
   const onChange = e =>
     setPosition({
@@ -80,7 +80,11 @@ const PositionForm = props => {
       </Form.Group>
       <Form.Group>
         <Form.Label htmlFor='venue'>Venue</Form.Label>
-        <Form.Control as='select' name='venue' onChange={onChangeVenue}>
+        <Form.Control
+          as='select'
+          name='venue'
+          value={position.venue._id}
+          onChange={onChangeVenue}>
           {venues.map(venue => (
             <option value={venue._id} key={venue._id}>
               {venue.location}

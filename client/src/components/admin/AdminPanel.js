@@ -1,4 +1,8 @@
 import React from 'react';
+
+import PrivateRoute from '../routing/PrivateRoute';
+import { useAuth } from '../../context/auth/AuthState';
+
 import Sidebar from './admin-layout/Sidebar';
 import AdmNavbar from './admin-layout/AdmNavbar';
 import Modals from './admin-layout/Modals';
@@ -8,9 +12,17 @@ import Positions from './admin-pages/Positions';
 import More from './admin-pages/More';
 import Footer from '../layout/Footer';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
-const AdminPanel = () => {
+const AdminPanel = props => {
+  const authState = useAuth()[0];
+  const { isAuthenticated } = authState;
+
+  if (!isAuthenticated) {
+    props.history.push('/login');
+    return null;
+  }
+
   return (
     <div className='wrapper'>
       <Sidebar />
@@ -19,12 +31,20 @@ const AdminPanel = () => {
         <Modals />
         <div id='admin-content'>
           <Switch>
-            <Route exact path='/admin' component={Dashboard} />
-            <Route exact path='/admin/home' component={HomeContent} />
-            <Route exact path='/admin/about/:id' component={More} />
-            <Route exact path='/admin/venues/:id' component={More} />
-            <Route exact path='/admin/positions' component={Positions} />
-            <Route exact path='/admin/positions/:id' component={More} />
+            <PrivateRoute exact path='/admin' component={Dashboard} />
+            <PrivateRoute exact path='/admin/home' component={HomeContent} />
+            <PrivateRoute exact path='/admin/about/edit' component={More} />
+            <PrivateRoute
+              exact
+              path='/admin/venues/edit/:id'
+              component={More}
+            />
+            <PrivateRoute exact path='/admin/positions' component={Positions} />
+            <PrivateRoute
+              exact
+              path='/admin/positions/edit/:id'
+              component={More}
+            />
           </Switch>
         </div>
         <Footer />

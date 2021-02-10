@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import {
   useCareers,
@@ -12,9 +12,8 @@ const PositionsTable = ({ recent, shortened }) => {
 
   useEffect(() => {
     getPositions(careersDispatch);
-  }, [careersDispatch, positions]);
+  }, [careersDispatch]);
 
-  let location = useLocation();
   let positionsFiltered, shortenDescription;
 
   // Sorts the positions by most recent
@@ -75,7 +74,7 @@ const PositionsTable = ({ recent, shortened }) => {
             <td>
               <Link
                 to={{
-                  pathname: `/admin/positions/${idx + 1}`,
+                  pathname: `/admin/positions/edit/${idx + 1}`,
                   state: {
                     position,
                     action: 'edit',

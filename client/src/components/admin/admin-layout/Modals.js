@@ -52,19 +52,15 @@ const AdminModals = () => {
         <div className='col-sm-6 mb-2'>{venuesButton}</div>
       </div>
     );
+  } else if (path.includes('edit')) {
+    buttons = <div className='row d-none'></div>;
+    classes = 'd-none';
   } else if (path.includes('positions')) {
     buttons = (
       <div className='row'>
         <div className='col-sm-10 mb-2 mx-auto'>{positionsButton}</div>
       </div>
     );
-  } else if (
-    path.includes('about/') ||
-    path.includes('venue/') ||
-    path.includes('position/')
-  ) {
-    buttons = <div className='row d-none'></div>;
-    classes = 'd-none';
   } else {
     buttons = (
       <div className='row'>
@@ -114,7 +110,11 @@ const AdminModals = () => {
           <h5 className='modal-title'>Edit About Section</h5>
         </Modal.Header>
         <Modal.Body>
-          <AboutForm />
+          <AboutForm
+            state={{
+              action: 'modal',
+            }}
+          />
         </Modal.Body>
         <Modal.Footer className='modal-footer'>
           <button

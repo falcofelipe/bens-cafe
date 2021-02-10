@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { useHome } from '../../../context/home/HomeState';
+import { useHome, getAbout } from '../../../context/home/HomeState';
 
 const AboutTable = ({ shortened }) => {
-  const homeState = useHome()[0];
+  const [homeState, homeDispatch] = useHome();
   const { about, loading } = homeState;
+
+  useEffect(() => {
+    getAbout(homeDispatch);
+  }, [homeDispatch]);
 
   const shortenDescription = description => {
     const descriptionArray = description.split(' ');
@@ -28,11 +33,23 @@ const AboutTable = ({ shortened }) => {
       <tbody>
         <tr>
           <td>{about.catchphrase}</td>
-          <td>{shortened ? shortenDescription(about.main) : about.main}</td>
           <td>
-            <a href='/admin/about/1' className='btn btn-accent btn-sm'>
+            {shortened && about.main
+              ? shortenDescription(about.main)
+              : about.main}
+          </td>
+          <td>
+            <Link
+              to={{
+                pathname: `/admin/about/edit`,
+                state: {
+                  about,
+                  action: 'edit',
+                },
+              }}
+              className='btn btn-accent btn-sm'>
               <i className='fas fa-angle-double-right'></i> More
-            </a>
+            </Link>
           </td>
         </tr>
       </tbody>

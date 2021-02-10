@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useHome } from '../../../context/home/HomeState';
 import VenueForm from './VenueForm';
 
@@ -42,6 +42,7 @@ const VenuesForm = () => {
         <VenueForm
           state={{
             venue,
+            action: 'modal',
           }}
         />
       ) : null}

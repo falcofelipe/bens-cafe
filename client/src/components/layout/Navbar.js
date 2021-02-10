@@ -10,7 +10,7 @@ const NavbarComponent = () => {
   const [authState, authDispatch] = useAuth();
   const { isAuthenticated, user } = authState;
 
-  const loginAndRegister = (
+  const nonUserLinks = (
     <NavDropdown title='Account' className='nav-acc-dropdown'>
       <Nav.Item>
         <Nav.Link href='/login' className='nav-acc-link'>
@@ -27,7 +27,7 @@ const NavbarComponent = () => {
     </NavDropdown>
   );
 
-  const logout = (
+  const userLinks = (
     <NavDropdown
       title={`Hello ${user ? user.name : null}`}
       className='nav-acc-dropdown'>
@@ -56,16 +56,20 @@ const NavbarComponent = () => {
         className='py-3 mx-0 w-100 mw-100'
         id='main-navbar'>
         <Container>
-          <Navbar.Brand>Ben's Café</Navbar.Brand>
+          <Navbar.Brand>
+            <a href='/' className='text-dark'>
+              Ben's Café
+            </a>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='main-navbar-nav' />
           <Navbar.Collapse id='main-navbar-nav'>
             <Nav className='ml-auto'>
-              <Nav.Link href='/'>Home</Nav.Link>
+              <Nav.Link href='/#showcase'>Home</Nav.Link>
               <Nav.Link href='/#about'>About Us</Nav.Link>
               <Nav.Link href='/#venues'>Our Venues</Nav.Link>
               <Nav.Link href='/careers'>Careers</Nav.Link>
               <Nav.Link href='/#contact'>Contact Us</Nav.Link>
-              {isAuthenticated ? logout : loginAndRegister}
+              {isAuthenticated ? userLinks : nonUserLinks}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
 
-$theme-colors: (
-  'accent': #a75a3e,
-);
-
 $primary: #fff3ec;
 $secondary: #c8894d;
 $light: #fffcf8;
+$accent: #a75a3e;
 // $dark: rgb(24, 22, 20);
 // $dark: #504948;
 // $dark-overlay: rgba(98, 111, 114, 0.8);
 $primary-overlay: #927b6ea1;
 $primary-light-overlay: #d1b5a54d;
+
+$theme-colors: (
+  'accent': $accent,
+);
 
 body {
   font-family: 'Quicksand', sans-serif !important;
@@ -30,6 +31,13 @@ html,
   box-shadow: 1px 1px 1px $primary;
   opacity: 0.9;
   background: #fff;
+
+  .navbar-brand {
+    a:hover {
+      text-decoration: none;
+      color: $accent;
+    }
+  }
 }
 
 .nav-acc-dropdown {
@@ -53,6 +61,15 @@ html,
 
 .dropdown-menu.show {
   background-color: $primary !important;
+}
+
+/* Offsets the anchors to account for Navbar */
+:target::before {
+  content: '';
+  display: block;
+  height: 72px; /* fixed header height*/
+  margin: -72px 0 0; /* negative fixed header height */
+  visibility: hidden;
 }
 
 #careers-content {
@@ -106,15 +123,6 @@ html,
     height: 100%;
   }
 }
-
-// .venue-img {
-//   min-height: 230px;
-//   height: auto;
-//   max-height: 240px;
-//   overflow: hidden;
-//   position: relative;
-//   object-fit: cover;
-// }
 
 .card-img-top {
   width: 100%;
@@ -217,10 +225,16 @@ table {
     background-color: $primary;
     text-align: left;
     padding-left: 0;
+    margin-left: 0;
   }
   .nav-acc-link {
     text-align: left;
     margin-left: 1rem;
+  }
+  #main-navbar {
+    .dropdown-menu {
+      transform: none !important;
+    }
   }
   #adm-navbar {
     .dropdown-menu {

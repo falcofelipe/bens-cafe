@@ -3,17 +3,17 @@ import Form from 'react-bootstrap/Form';
 import { useHome, updateVenue } from '../../../context/home/HomeState';
 
 const VenueForm = props => {
-  const [homeState, homeDispatch] = useHome();
+  const homeDispatch = useHome()[1];
 
   const initialState = props.state.venue;
+  const { action } = props.state;
 
-  let formId = `venue-form-${initialState._id}`;
+  const formId = `venue-form-${action}`;
 
   const [venue, setVenue] = useState(initialState);
 
   useEffect(() => {
     setVenue(props.state.venue);
-    formId = `venue-form-${props.state.venue._id}`;
   }, [props.state.venue]);
 
   let { location, description } = venue;

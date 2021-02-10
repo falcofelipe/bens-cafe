@@ -8,6 +8,7 @@ import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+import PrivateRoute from './components/routing/PrivateRoute';
 import AdminPanel from './components/admin/AdminPanel';
 
 import CareersState from './context/careers/CareersState';
@@ -26,11 +27,11 @@ function App() {
             <AlertState>
               <Router>
                 <Switch>
-                  <Route path='/admin'>
+                  <PrivateRoute path='/admin'>
                     <Switch>
-                      <Route path='/admin' component={AdminPanel} />
+                      <PrivateRoute path='/admin' component={AdminPanel} />
                     </Switch>
-                  </Route>
+                  </PrivateRoute>
                   <Route path='/'>
                     <Navbar />
                     <Switch>

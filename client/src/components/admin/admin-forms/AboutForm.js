@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import {
-  useHome,
-  updateAbout,
-  updateVenue,
-} from '../../../context/home/HomeState';
+import { useHome, updateAbout } from '../../../context/home/HomeState';
 
-const EditAboutForm = props => {
+const AboutForm = props => {
   const [homeState, homeDispatch] = useHome();
   const { loading } = homeState;
   const aboutState = homeState.about;
+
+  const { action } = props.state;
+
+  const formId = `about-form-${action}`;
 
   const [about, setAbout] = useState({
     catchphrase: '',
@@ -41,7 +41,7 @@ const EditAboutForm = props => {
   };
 
   return (
-    <Form id='about-form' onSubmit={onSubmit}>
+    <Form id={formId} onSubmit={onSubmit}>
       <Form.Group>
         <Form.Label htmlFor='catchphrase'>Catchphrase</Form.Label>
         <Form.Control
@@ -64,4 +64,4 @@ const EditAboutForm = props => {
   );
 };
 
-export default EditAboutForm;
+export default AboutForm;

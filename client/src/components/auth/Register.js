@@ -54,7 +54,7 @@ const Register = props => {
         name: username,
         email,
         password,
-        type: 'user',
+        type: 'admin',
       });
     }
   };

@@ -6,7 +6,9 @@ import homeReducer from './homeReducer';
 import {
   GET_CONTENT,
   CONTENT_ERROR,
+  GET_ABOUT,
   UPDATE_ABOUT,
+  GET_VENUES,
   UPDATE_VENUE,
 } from '../types';
 
@@ -21,6 +23,40 @@ const config = {
   headers: {
     'Content-Type': 'application/json',
   },
+};
+
+export const getAbout = async dispatch => {
+  try {
+    const about = await axios.get('/api/about');
+
+    dispatch({
+      type: GET_ABOUT,
+      payload: about.data,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: CONTENT_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
+};
+
+export const getVenues = async dispatch => {
+  try {
+    const venues = await axios.get('/api/venues');
+
+    dispatch({
+      type: GET_VENUES,
+      payload: venues.data,
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: CONTENT_ERROR,
+      payload: err.response.data.msg,
+    });
+  }
 };
 
 export const updateAbout = async (dispatch, updatedAbout) => {

@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+import { useAuth, logoutUser } from '../../../context/auth/AuthState';
+
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -7,7 +9,10 @@ import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const AdmNavbar = () => {
+const AdmNavbar = props => {
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated, user } = authState;
+
   const toggleSidebar = () => {
     const sidebar = document.getElementById('sidebar');
     const main = document.getElementById('admin-main');
@@ -34,6 +39,10 @@ const AdmNavbar = () => {
     iconClass = 'fas fa-cog';
   }
 
+  const onLogout = () => {
+    logoutUser(authDispatch);
+  };
+
   return (
     <Fragment>
       <Navbar
@@ -51,24 +60,28 @@ const AdmNavbar = () => {
             <i className={iconClass} /> {title}
           </Navbar.Brand>
           <Nav>
-            <Dropdown
-              as={NavItem}
-              id='adm-acc-dropdown'
-              className='text-primary'>
-              <Dropdown.Toggle as={NavLink}>
-                <i className='fas fa-user' />{' '}
-                <span className='d-none d-lg-inline'>Hello Chris</span>
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  href='/'
-                  onClick={() => console.log('Logged Out')}
-                  className='text-center'>
-                  <i className='fas fa-sign-out-alt' />{' '}
-                  <span className='hide-sm'>Logout</span>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            {isAuthenticated ? (
+              <Dropdown
+                as={NavItem}
+                id='adm-acc-dropdown'
+                className='text-primary'>
+                <Dropdown.Toggle as={NavLink}>
+                  <i className='fas fa-user' />{' '}
+                  <span className='d-none d-lg-inline'>
+                    Hello {user ? user.name : null}
+                  </span>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    href='#!'
+                    onClick={onLogout}
+                    className='text-center'>
+                    <i className='fas fa-sign-out-alt' />{' '}
+                    <span className='hide-sm'>Logout</span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : null}
           </Nav>
         </Container>
       </Navbar>
