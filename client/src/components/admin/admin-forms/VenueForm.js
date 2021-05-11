@@ -47,9 +47,7 @@ const VenueForm = (props) => {
 				/>
 			</Form.Group>
 			<Form.Group>
-				<Form.Label htmlFor='venue-description'>
-					Venue Description
-				</Form.Label>
+				<Form.Label htmlFor='description'>Venue Description</Form.Label>
 				<Form.Control
 					as='textarea'
 					name='description'
