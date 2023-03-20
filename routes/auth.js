@@ -70,7 +70,8 @@ router.post(
 				},
 			};
 
-			let jwtSecret = process.env.JWT_SECRET ?? config.get('jwtSecret');
+			//let jwtSecret = process.env.JWT_SECRET ?? config.get('jwtSecret');
+			let jwtSecret = config.get('jwtSecret');
 
 			jwt.sign(
 				payload,
@@ -81,6 +82,7 @@ router.post(
 				(err, token) => {
 					console.log(err);
 					if (err) throw err;
+					console.log(token);
 					res.json({ token });
 				}
 			);

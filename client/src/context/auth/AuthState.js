@@ -71,13 +71,20 @@ export const loginUser = async (dispatch, user) => {
 	try {
 		const token = await axios.post('/api/auth', user, config);
 
+		console.log('logging user...');
+		console.log('token:', token);
+
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: token.data,
 		});
 
+		console.log('dispatching user...');
+		console.log('token data:', token.data);
+
 		loadUser(dispatch);
 	} catch (err) {
+		console.log(err);
 		dispatch({
 			type: LOGIN_FAIL,
 			payload: err.response.data.msg,
