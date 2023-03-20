@@ -40,6 +40,7 @@ router.post(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
+			console.log(err);
 			return res.status(400).json({ msg: errors.array() });
 		}
 
@@ -69,18 +70,22 @@ router.post(
 				},
 			};
 
+			let jwtSecret = process.env.JWT_SECRET ?? config.get('jwtSecret');
+
 			jwt.sign(
 				payload,
-				process.env.JWT_SECRET ?? config.get('jwtSecret'),
+				jwtSecret,
 				{
 					expiresIn: 360000,
 				},
 				(err, token) => {
+					console.log(err);
 					if (err) throw err;
 					res.json({ token });
 				}
 			);
 		} catch (err) {
+			console.log(err);
 			console.error(err.message);
 			res.status(500).send('Server Error');
 		}
