@@ -1,0 +1,4 @@
+{
+	"mongoURI": "mongodb+srv://falco27:8Bolqq8ciXKZpUhB@bens-cafe.lyss5.mongodb.net/?retryWrites=true&w=majority",
+	"jwtSecret": "benscafe654"
+}
